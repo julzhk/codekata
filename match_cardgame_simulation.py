@@ -56,11 +56,13 @@ class Deck(object):
 def main():
     number_of_decks = initialize_game()
     players = ['p1','p2']
+    no_players = len(players)
     scores = defaultdict(int)
     deck = Deck(numberofdecks=number_of_decks)
     shuffle(deck)
-    prev_indx = - (len(players))
-    for indx in range(0,len(deck))[::2]:
+    prev_indx = - no_players
+    # use slicing to step thru N at a time
+    for indx in range(0,len(deck))[::no_players]:
         print '.',
         if deck[indx] == deck[indx + 1]:
             print 'top cards: {} & {}'.format(deck[indx], deck[indx + 1])
