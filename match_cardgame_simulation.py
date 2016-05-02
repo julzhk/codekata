@@ -59,7 +59,7 @@ def main():
     scores = defaultdict(int)
     deck = Deck(numberofdecks=number_of_decks)
     shuffle(deck)
-    prev_indx = -2
+    prev_indx = - (len(players))
     for indx in range(0,len(deck))[::2]:
         print '.',
         if deck[indx] == deck[indx + 1]:
