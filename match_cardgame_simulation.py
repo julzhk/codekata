@@ -1,6 +1,13 @@
 # coding=utf-8
-# Thanks to (awesome!) 'Fluent Python' book for inspiration for the Deck class.
 
+# Kata: Simulate the game 'SNAP!'
+# Features:
+#  - Allow variable number of standard 52-card decks
+#  - Allow for several 'matching' conditions: either match just suit, or just rank, or match on both.
+
+# ----
+
+# Thanks to (awesome!) 'Fluent Python' book for inspiration for the Deck class.
 # see: Fluent Python by Luciano Ramalho (O’Reilly).
 # Copyright 2015 Luciano Ramalho, 978-1-491-94600-8.
 # and
