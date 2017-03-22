@@ -16,26 +16,24 @@ The function takes a list of voter ballots; each ballot will be a list of candid
 preference. 
 Returns the symbol corresponding to the winning candidate.
     """
-    final_tally = defaultdict(int)
-    removed_candidates = []
+    votes_cast_so_far=0
+    final_tally = Counter()
+    removed_candidates =  set()
     for this_round in range(len(voters[0])):
         this_round_votes = [voter[this_round] for voter in voters if voter[this_round] not in removed_candidates]
-        tally = dict(Counter(this_round_votes))
-        for candidate in tally:
-            final_tally[candidate] +=tally[candidate]
-        leader = max(final_tally, key=tally.get)
-        total_votes = sum([final_tally[i] for i in final_tally])
-        if final_tally[leader] >= total_votes / 2.0:
+        if not this_round_votes:
+            # all knocked out
+            return None
+        tally = Counter(this_round_votes)
+        final_tally.update(tally)
+        leader = max(final_tally, key=final_tally.get)
+        votes_cast_so_far += sum(final_tally.values())
+        if final_tally[leader] >= votes_cast_so_far / 2.0:
                 return leader
-        # no clear winner
-        knockout_candidate = min(tally, key=tally.get)
-        knockout_candidate_votes = tally[knockout_candidate]
-        for candidate in tally:
-            if tally[candidate] == knockout_candidate_votes:
-                removed_candidates.append(candidate)
-                del final_tally[knockout_candidate]
-        
-
+        lowest_vote = min(tally.values())
+        knockout_candidates = [candidate for candidate in tally if tally[candidate] == lowest_vote]
+        removed_candidates |= set(knockout_candidates)
+  
 voters =  [
 ['c', 'a', 'b', 'd', 'e'], 
 ['b', 'e', 'd', 'c', 'a'], 
