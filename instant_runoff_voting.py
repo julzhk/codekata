@@ -26,7 +26,7 @@ Returns the symbol corresponding to the winning candidate.
             return None
         tally = Counter(this_round_votes)
         final_tally.update(tally)
-        leader = max(final_tally, key=final_tally.get)
+        leader = final_tally.most_common(1)
         votes_cast_so_far += sum(final_tally.values())
         if final_tally[leader] >= votes_cast_so_far / 2.0:
                 return leader
